@@ -1,0 +1,32 @@
+{
+  "name": "smsorange",
+  "version": "0.0.1",
+  "description": "A Node.js module for send sms with bundle Orange.",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rochelryu/orangeSms.git"
+    },
+  "keywords": ["orange", "sms"],
+  "author": "rochel225",
+
+  "readme": "# A Node.js module for send sms with bundle Orange. ",
+  "readmeFilename": "README.md",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "engines": {
+    "node": "*"
+  },
+    "bugs": {
+    "url": "https://github.com/rochelryu/orangeSms/issues",
+    "email": "core.irie@gmail.com"
+    },
+    "homepage": "https://github.com/rochelryu/orangeSms",
+    "scripts": {
+      "test": "mocha"
+    },
+    "private": false,
+    "engineStrict": true
+}
