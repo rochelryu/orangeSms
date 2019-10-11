@@ -13,7 +13,6 @@
 
 
 ![smsorange](http://www.thatquickmedia.com/images/smpp.jpg)
-npm publish --access=public
 
 
 
