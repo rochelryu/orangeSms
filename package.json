@@ -1,7 +1,7 @@
 {
   "name": "smsorange",
-  "version": "0.0.1",
-  "description": "A Node.js module for send sms with bundle Orange.",
+  "version": "0.0.2",
+  "description": "A Node.js module for send sms with bundle Orange. with ",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "readmeFilename": "README.md",
   "license": "ISC",
   "dependencies": {
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   },
   "engines": {
     "node": "*"

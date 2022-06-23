@@ -50,16 +50,17 @@ $ npm i smsorange
 const smsorange = require("smsorange")
 
 // Promise interface
-let SMS = new smsorange("<Your Authorization header>","<Your Number>")
+let SMS = new smsorange("<Your Authorization header>","<Your Number>", "<Sender Name or Service Name>" )
+//Your Number Type : prefix + number (+225XXXXXXXX)
 
-SMS.sendSms('numberOfReceiver', 'Your message. 😜');
+SMS.sendSms('numberOfReceiver', 'Your message. 👍');
+//numberOfReceiver Type : prefix + number (+225XXXXXXXX)
+
 // The message content-type UTF-8
 //    More 160 char equal 2 Sms (same partition with message on GSM)
 //        if your message is send one object is return and contain {statusCode, body, numberReceiver, NumberSender, HeaderQuery, URL, timestamp}
 //        assert(statusCode, "201") ? the message is send with successful: the message is not send; 
 //        In case Error, one error is return error
-//Your Number Type : prefix + number (+22501020304)
-//numberOfReceiver Type : prefix + number (+22505060708)
 ```
 
 
