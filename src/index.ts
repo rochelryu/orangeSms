@@ -38,7 +38,7 @@ export class SmsOrange {
     let postData = '';
     postData += 'grant_type=client_credentials';
     return new Promise(async (next) => {
-      this.AxiosInstance.post('https:// api.orange.com/oauth/v3/token', postData, {
+      this.AxiosInstance.post('https://api.orange.com/oauth/v3/token', postData, {
         headers: {
           Authorization: this.authorizationHeader,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -73,7 +73,7 @@ export class SmsOrange {
     }
     await this.refreshTokenIfExpired();
     const recipientNumber = `tel:${data.numberTo.trim()}`;
-    const uri = `https:// api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests`;
+    const uri = `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests`;
     return new Promise(async (next) => {
       this.AxiosInstance.post(
         uri,
@@ -108,7 +108,7 @@ export class SmsOrange {
   async getBalanceAvailable(): Promise<any> {
     await this.refreshTokenIfExpired();
     return new Promise(async (next) => {
-      this.AxiosInstance.get('https:// api.orange.com/sms/admin/v1/contracts', {
+      this.AxiosInstance.get('https://api.orange.com/sms/admin/v1/contracts', {
         headers: {
           Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
         },
@@ -126,7 +126,7 @@ export class SmsOrange {
   async getStatisticsSmsSent(): Promise<any> {
     await this.refreshTokenIfExpired();
     return new Promise(async (next) => {
-      this.AxiosInstance.get('https:// api.orange.com/sms/admin/v1/statistics', {
+      this.AxiosInstance.get('https://api.orange.com/sms/admin/v1/statistics', {
         headers: {
           Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
         },
@@ -144,7 +144,7 @@ export class SmsOrange {
   async getPurchaseOrder(): Promise<any> {
     await this.refreshTokenIfExpired();
     return new Promise(async (next) => {
-      this.AxiosInstance.get('https:// api.orange.com/sms/admin/v1/purchaseorders', {
+      this.AxiosInstance.get('https://api.orange.com/sms/admin/v1/purchaseorders', {
         headers: {
           Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
         },
