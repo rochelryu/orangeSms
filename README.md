@@ -220,7 +220,7 @@ See the [LICENSE][license] file.
 Rochel Ryu | Dev JS/TS Dart & Kotlin
 
 ## Which uses this package
-![SHOUZ](https://www.shouz.network/static/media/logo-7.e73ba927.png | width=40)
+<a href='https://www.shouz.network' target='_blank'><img src="https://www.shouz.network/static/media/logo-7.e73ba927.png" width="33" height="40" /></a>
 
 [license]: /LICENSE
 [contributing]: /CONTRIBUTING.md
