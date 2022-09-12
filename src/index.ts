@@ -1,3 +1,5 @@
+import * as https from 'https';
+
 import axios from 'axios';
 
 interface AccessTokenInterface {
@@ -17,7 +19,11 @@ export class SmsOrange {
     expires_in: 0,
     timeStamp: new Date().getTime(),
   };
-  private AxiosInstance = axios.create();
+  private AxiosInstance = axios.create({
+    httpsAgent: new https.Agent({  
+      rejectUnauthorized: false
+    })
+  });
   constructor(init: { authorization_header: string; yourNumber: string; senderName: string }) {
     if (init.yourNumber.indexOf('+') === -1) {
       throw new Error('yourNumber is incorrect, please use the format (prefix+number. Ex: +XXXXXXXXX)');
