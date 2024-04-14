@@ -65,12 +65,36 @@ const smsWrapper = new SmsOrange({authorization_header:"<Your Authorization head
 
 
 ---
-## How to send Message (plugin generate accessToken auto if it is expired)
+## How to send Message at one address (plugin generate accessToken auto if it is expired)
 
 ```ts
 const response = await smsWrapper.sendSms({numberTo: 'numberOfReceiver', message:'Your message. 👍'});
 
 //numberTo Type : prefix + number (+225XXXXXXXX)
+
+// The message content-type UTF-8
+//    More 160 char equal 2 Sms (same partition with message on GSM)
+// response return this :
+/*  {
+        outboundSMSMessageRequest: {
+            address: [ 'tel:numberTo' ],
+            senderAddress: 'tel:yourNumber',
+            outboundSMSTextMessage: {
+                message: message,
+            },
+            resourceURL: string,
+        }
+    }
+*/
+```
+
+---
+## How to send Message at many Address (plugin generate accessToken auto if it is expired)
+
+```ts
+const response = await smsWrapper.sendSms({numberTo: ['numberOfReceiver','numberOfReceiver','numberOfReceiver',...], message:'Your message. 👍'});
+
+//numberOfReceiver Type : prefix + number (+225XXXXXXXX)
 
 // The message content-type UTF-8
 //    More 160 char equal 2 Sms (same partition with message on GSM)
