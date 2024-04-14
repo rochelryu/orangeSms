@@ -45,10 +45,10 @@ export class SmsOrange {
           Accept: 'application/json',
         },
       })
-        .then((response) => {
+        .then((response: { data: any }) => {
           next({ ...response.data, timeStamp: new Date().setSeconds(3600) });
         })
-        .catch((error) => {
+        .catch((error: { message: unknown }) => {
           next(error.message);
         });
     });
@@ -64,18 +64,21 @@ export class SmsOrange {
     }
   }
 
-  async sendSms(data: { numberTo: string; message: string }): Promise<any> {
-    if (data.numberTo.indexOf('+') === -1) {
-      throw new Error('recipient number is incorrect, please use the format (prefix+number. Ex: +XXXXXXXXX)');
-    }
+  async sendSms(data: { numberTo: string | string[]; message: string }): Promise<any[]> {
     if (data.message.trim().length < 1) {
       throw new Error('message is too short');
     }
     await this.refreshTokenIfExpired();
-    const recipientNumber = `tel:${data.numberTo.trim()}`;
-    const uri = `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests`;
-    return new Promise(async (next) => {
-      this.AxiosInstance.post(
+    const numbersTo = Array.isArray(data.numberTo) ? data.numberTo : [data.numberTo];
+    const messagesPromises = numbersTo.map((numberReceive) => {
+      if (numberReceive.indexOf('+') === -1) {
+        throw new Error('Recipient number is incorrect, please use the format (prefix+number. Ex: +XXXXXXXXX)');
+      }
+      const recipientNumber = `tel:${numberReceive.trim()}`;
+      const uri = `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests${
+        numberReceive.substring(0, 6) === '+22507' ? '?resource_type_parameter_management=SMS_OCB2' : ''
+      }`;
+      return this.AxiosInstance.post(
         uri,
         {
           outboundSMSMessageRequest: {
@@ -89,20 +92,19 @@ export class SmsOrange {
         },
         {
           headers: {
-            Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
+            Authorization: `${this.info.token_type} ${this.info.access_token}`,
             'Content-Type': 'application/json',
             'Accept-Charset': 'utf-8',
           },
         },
       )
-        .then((response) => {
-          const body = { ...response.data };
-          next(body);
-        })
-        .catch((error) => {
-          next(error.message);
+        .then((response: { data: any }) => response.data)
+        .catch((error: { message: string | undefined }) => {
+          throw new Error(error.message);
         });
     });
+
+    return Promise.all(messagesPromises);
   }
 
   async getBalanceAvailable(): Promise<any> {
@@ -113,11 +115,11 @@ export class SmsOrange {
           Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
         },
       })
-        .then((response) => {
+        .then((response: { data: any }) => {
           const body = { ...response.data };
           next(body);
         })
-        .catch((error) => {
+        .catch((error: { message: unknown }) => {
           next(error.message);
         });
     });
@@ -131,11 +133,11 @@ export class SmsOrange {
           Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
         },
       })
-        .then((response) => {
+        .then((response: { data: any }) => {
           const body = { ...response.data };
           next(body);
         })
-        .catch((error) => {
+        .catch((error: { message: unknown }) => {
           next(error.message);
         });
     });
@@ -149,11 +151,11 @@ export class SmsOrange {
           Authorization: `${this.info.token_type} ${this.info.access_token}`, // ${this.info.access_token}
         },
       })
-        .then((response) => {
+        .then((response: { data: any }) => {
           const body = { ...response.data };
           next(body);
         })
-        .catch((error) => {
+        .catch((error: { message: unknown }) => {
           next(error.message);
         });
     });
