@@ -96,10 +96,7 @@ export class SmsOrange {
           },
         },
       )
-        .then((response: { data: any }) => {
-          console.log(response.data);
-          return response.data;
-        })
+        .then((response: { data: any }) => response.data)
         .catch((error: { message: string | undefined }) => {
           throw new Error(error.message);
         });
