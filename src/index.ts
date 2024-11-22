@@ -75,9 +75,7 @@ export class SmsOrange {
         throw new Error('Recipient number is incorrect, please use the format (prefix+number. Ex: +XXXXXXXXX)');
       }
       const recipientNumber = `tel:${numberReceive.trim()}`;
-      const uri = `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests${
-        numberReceive.substring(0, 6) === '+22507' ? '?resource_type_parameter_management=SMS_OCB2' : ''
-      }`;
+      const uri = `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests`;
       return this.AxiosInstance.post(
         uri,
         {
@@ -98,7 +96,10 @@ export class SmsOrange {
           },
         },
       )
-        .then((response: { data: any }) => response.data)
+        .then((response: { data: any }) => {
+          console.log(response.data);
+          return response.data;
+        })
         .catch((error: { message: string | undefined }) => {
           throw new Error(error.message);
         });

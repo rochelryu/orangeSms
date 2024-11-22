@@ -1,6 +1,6 @@
 {
   "name": "smsorange",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A Node.js module for send sms with bundle Orange. (With developper orange account)",
   "main": "lib/index.js",
    "types": "lib/index.d.ts",

@@ -4,9 +4,9 @@ describe('smsOrange Test all EndPoint', () => {
   let smsWrapper: any;
   beforeAll(() => {
     smsWrapper = new SmsOrange({
-      authorization_header: 'Basic xxxxxxxxxxxxxxxxxxxxx',
-      yourNumber: '+XXXXXXXXXXXXX',
-      senderName: 'Company Name',
+      authorization_header: 'Basic XXXXXXXXXXXXXXXXXXXXXXXXXXXXX==',
+      yourNumber: '+225XXXXXXXXXX',
+      senderName: 'XXXXXXXX',
     });
   });
 
@@ -16,17 +16,17 @@ describe('smsOrange Test all EndPoint', () => {
   });
   test('Get Balance info', async () => {
     const balance = await smsWrapper.getBalanceAvailable();
-    expect(balance.partnerContracts.partnerId).toBe('dev orange email');
+    expect(balance[0].offerName).toBe('SMS_OCB');
   });
 
   test('Send Message of Client', async () => {
-    const recepientNumber = '+XXXXXXXXXXXXXXX';
+    const recepientNumber = ['+2250564250219', '+2250700924216', '+2250142081716'];
     const message = 'Your Message here !';
 
     const response = await smsWrapper.sendSms({ numberTo: recepientNumber, message });
-    expect(response.outboundSMSMessageRequest.senderName).toBe('<senderName>');
-    expect(response.outboundSMSMessageRequest.senderAddress).toBe('tel:<yourNumber>');
-    expect(response.outboundSMSMessageRequest.address[0]).toBe(`tel:${recepientNumber}`);
-    expect(response.outboundSMSMessageRequest.outboundSMSTextMessage.message).toBe(message.trim());
+    expect(response[0].outboundSMSMessageRequest.senderName).toBe('<senderName>');
+    expect(response[0].outboundSMSMessageRequest.senderAddress).toBe('tel:<yourNumber>');
+    expect(response[0].outboundSMSMessageRequest.address[0]).toBe(`tel:${recepientNumber[0]}`);
+    expect(response[0].outboundSMSMessageRequest.outboundSMSTextMessage.message).toBe(message.trim());
   });
 });
