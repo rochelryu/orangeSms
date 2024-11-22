@@ -74,7 +74,7 @@ export class SmsOrange {
       if (numberReceive.indexOf('+') === -1) {
         throw new Error('Recipient number is incorrect, please use the format (prefix+number. Ex: +XXXXXXXXX)');
       }
-      const recipientNumber = `tel:${numberReceive.trim()}`;
+      const recipientNumber = `tel:${numberReceive.replaceAll(' ', '').trim()}`;
       const uri = `https://api.orange.com/smsmessaging/v1/outbound/tel:${this.yourNumber}/requests`;
       return this.AxiosInstance.post(
         uri,
